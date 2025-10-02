@@ -18,7 +18,7 @@ export async function getCurrentUser() {
  * @param userId - The user ID to fetch profile for
  * @returns Profile data or null
  */
-export async function getUserProfile(userId: string) {
+export async function getUserProfile(userId: string): Promise<{ full_name: string | null } | null> {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('profiles')
@@ -26,7 +26,7 @@ export async function getUserProfile(userId: string) {
     .eq('user_id', userId)
     .single()
 
-  if (error) throw new Error('Failed to fetch user profile')
+  if (error) return null
 
   return data
 }
