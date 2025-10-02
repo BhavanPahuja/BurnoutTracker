@@ -23,7 +23,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <DashboardHeader userName={profile?.full_name || user.email} />
+      <DashboardHeader userName={profile?.full_name || user.email || null} />
 
       <main className="container mx-auto px-4 py-8">
         {!hasCompletedQuestionnaire ? (
