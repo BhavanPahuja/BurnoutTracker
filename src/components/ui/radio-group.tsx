@@ -32,7 +32,7 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
 RadioGroup.displayName = 'RadioGroup'
 
 interface RadioGroupItemProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onSelect'> {
   value: string
   onSelect?: (value: string) => void
   checked?: boolean

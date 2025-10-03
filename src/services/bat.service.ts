@@ -1,5 +1,8 @@
 import { createClient } from '@/lib/supabase/server'
 import type { BATResponses, BATScores } from '@/types/bat.type'
+import type { Database } from '@/types/database.type'
+
+type BATResponseRecord = Database['public']['Tables']['bat_responses']['Row']
 
 /**
  * Calculates BAT scores from responses
@@ -37,11 +40,11 @@ export async function saveBATResponses({
 }: {
   userId: string
   responses: BATResponses
-}) {
+}): Promise<BATResponseRecord> {
   const scores = calculateBATScores(responses)
   const supabase = await createClient()
 
-  const { data, error } = await supabase
+  const { data, error } = await (supabase
     .from('bat_responses')
     .insert({
       user_id: userId,
@@ -50,9 +53,9 @@ export async function saveBATResponses({
       cognitive_impairment_score: scores.cognitiveImpairmentScore,
       total_score: scores.totalScore,
       responses: responses as any,
-    })
+    } as any)
     .select()
-    .single()
+    .single() as any)
 
   if (error) throw new Error('Failed to save BAT responses')
 
@@ -62,7 +65,7 @@ export async function saveBATResponses({
 /**
  * Gets all BAT responses for a user
  */
-export async function getUserBATResponses(userId: string) {
+export async function getUserBATResponses(userId: string): Promise<BATResponseRecord[]> {
   const supabase = await createClient()
 
   const { data, error } = await supabase
@@ -73,13 +76,13 @@ export async function getUserBATResponses(userId: string) {
 
   if (error) throw new Error('Failed to fetch BAT responses')
 
-  return data
+  return data || []
 }
 
 /**
  * Gets the latest BAT response for a user
  */
-export async function getLatestBATResponse(userId: string) {
+export async function getLatestBATResponse(userId: string): Promise<BATResponseRecord | null> {
   const supabase = await createClient()
 
   const { data, error } = await supabase

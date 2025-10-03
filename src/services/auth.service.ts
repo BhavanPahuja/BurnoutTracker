@@ -1,4 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
+import type { Database } from '@/types/database.type'
+
+type ProfileRow = Database['public']['Tables']['profiles']['Row']
 
 /**
  * Gets the currently authenticated user
@@ -18,7 +21,7 @@ export async function getCurrentUser() {
  * @param userId - The user ID to fetch profile for
  * @returns Profile data or null
  */
-export async function getUserProfile(userId: string): Promise<{ full_name: string | null } | null> {
+export async function getUserProfile(userId: string): Promise<ProfileRow | null> {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('profiles')
