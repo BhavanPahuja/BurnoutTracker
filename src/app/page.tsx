@@ -46,11 +46,7 @@ export default async function HomePage() {
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
-              Take Control of Your
-              <br />
-              <span className="bg-gradient-to-r from-foreground via-foreground/80 to-foreground/60 bg-clip-text">
-                Work-Life Balance
-              </span>
+              Take Control of Your Work-Life Balance
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
