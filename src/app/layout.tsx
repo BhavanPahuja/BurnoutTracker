@@ -10,7 +10,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Burnout Tracker',
-  description: 'Track and monitor your work-related burnout levels',
+  description: 'Track and monitor your work-related burnout levels with the scientifically validated Burnout Assessment Tool (BAT)',
+  icons: {
+    icon: '/icon',
+    apple: '/icon',
+  },
 }
 
 export default function RootLayout({
